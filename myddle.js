@@ -26,6 +26,7 @@ module.exports = function(fns, context, callback) {
 
         // we're finished since there are no more fns
         if ( upToIndex === fns.length ) {
+            console.log('doNextError(): calling callback');
             return callback(err);
         }
 
@@ -47,11 +48,13 @@ module.exports = function(fns, context, callback) {
         // call this function with the context
         console.log('doNext(): calling next myddleware at ' + upToIndex);
         fns[upToIndex](context, function(thisErr) {
-            console.log('doNext(): got an error after calling the myddleware');
             if (thisErr) {
+                console.log('doNext(): got an error after calling the regular myddleware');
                 err = thisErr;
                 return doNextError();
             }
+
+            console.log('doNext(): no error after calling the regular myddleware');
 
             // no error, so continue back on the regular chain and clear the error
             err = null;
@@ -65,8 +68,9 @@ module.exports = function(fns, context, callback) {
         // incremement to the next function
         upToIndex = upToIndex + 1;
 
-        // we may be finished already
+        // we're finished since there are no more fns
         if ( upToIndex === fns.length ) {
+            console.log('doNextError(): calling callback');
             return callback(err);
         }
 
@@ -88,12 +92,13 @@ module.exports = function(fns, context, callback) {
         // call this function with the err and the context
         console.log('doNextError(): calling next myddleware at ' + upToIndex);
         fns[upToIndex](err, context, function(thisErr) {
-            console.log('doNextError(): got an error after calling the myddleware');
-            if (err) {
+            if (thisErr) {
+                console.log('doNextError(): got an error after calling the error myddleware');
                 err = thisErr;
                 return doNextError();
             }
             // no error, so continue back on the regular chain and clear the error
+            console.log('doNextError(): No error after calling the error myddleware');
             err = null;
             doNext();
         });
