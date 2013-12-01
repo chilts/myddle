@@ -1,4 +1,17 @@
-myddle - Context carrying Middleware for regular functions, with error handlers.
+```
+                  .___  .___.__          
+  _____ ___.__. __| _/__| _/|  |   ____  
+ /     <   |  |/ __ |/ __ | |  | _/ __ \ 
+|  Y Y  \___  / /_/ / /_/ | |  |_\  ___/ 
+|__|_|  / ____\____ \____ | |____/\___  >
+      \/\/         \/    \/           \/ 
+
+```
+
+Context carrying Middleware for regular functions, with error handlers. Kinda like async#applyEachSeries, but with
+error functions too.
+
+[![Build Status](https://api.travis-ci.org/chilts/nice-route53.png)](https://api.travis-ci.org/chilts/nice-route53.png)
 
 ## Synopsis ##
 
