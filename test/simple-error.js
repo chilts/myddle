@@ -1,33 +1,19 @@
-var myddle = require('../');
+// ----------------------------------------------------------------------------
+//
+// Copyright 2013 Andrew Chilton. All Rights Reserved.
+//
+// License: MIT - http://chilts.mit-license.org/2013/
+//
+// ----------------------------------------------------------------------------
+
+// npm
 var test = require('tape');
 
-function error1(context, next) {
-    process.nextTick(function() {
-        next('this is an error');
-    });
-}
+// local
+var myddle = require('../');
 
-function handleError1(err, context, next) {
-    console.log('=== context ===', context);
-    process.nextTick(function() {
-        context.t.equal(err, 'this is an error', 'The error passed to handleError() is correct');
-        next('a different error');
-    });
-}
-
-function handleError2(err, context, next) {
-    process.nextTick(function() {
-        context.t.equal(err, 'a different error', 'The error passed to handleError() is correct');
-        next('the final error');
-    });
-}
-
-function consumeError(err, context, next) {
-    console.log('=== context ===', context);
-    process.nextTick(function() {
-        next();
-    });
-}
+// ----------------------------------------------------------------------------
+// tests
 
 test('got an error immediately', function(t) {
     var ctx = {};
@@ -85,3 +71,36 @@ test('two error myddlewares, first consumes the error', function(t) {
         }
     );
 });
+
+// ----------------------------------------------------------------------------
+// helpers
+
+function error1(context, next) {
+    process.nextTick(function() {
+        next('this is an error');
+    });
+}
+
+function handleError1(err, context, next) {
+    console.log('=== context ===', context);
+    process.nextTick(function() {
+        context.t.equal(err, 'this is an error', 'The error passed to handleError() is correct');
+        next('a different error');
+    });
+}
+
+function handleError2(err, context, next) {
+    process.nextTick(function() {
+        context.t.equal(err, 'a different error', 'The error passed to handleError() is correct');
+        next('the final error');
+    });
+}
+
+function consumeError(err, context, next) {
+    console.log('=== context ===', context);
+    process.nextTick(function() {
+        next();
+    });
+}
+
+// ----------------------------------------------------------------------------

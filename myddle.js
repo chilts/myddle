@@ -1,5 +1,12 @@
-
-
+// ----------------------------------------------------------------------------
+//
+// myddle.js - Context carrying Middleware for regular functions, with error handlers.
+//
+// Copyright 2013 Andrew Chilton. All Rights Reserved.
+//
+// License: MIT - http://chilts.mit-license.org/2013/
+//
+// ----------------------------------------------------------------------------
 
 module.exports = function(fns, context, callback) {
     if ( typeof context === 'function' ) {
@@ -108,3 +115,4 @@ module.exports = function(fns, context, callback) {
     doNext();
 };
 
+// ----------------------------------------------------------------------------

@@ -1,4 +1,10 @@
 // ----------------------------------------------------------------------------
+//
+// Copyright 2013 Andrew Chilton. All Rights Reserved.
+//
+// License: MIT - http://chilts.mit-license.org/2013/
+//
+// ----------------------------------------------------------------------------
 
 // npm
 var test = require('tape');
