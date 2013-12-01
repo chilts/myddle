@@ -11,5 +11,10 @@
 
   "scripts": {
     "test": "set -e; for FILE in test/*.js; do echo \"=== $FILE ===\"; node $FILE; done"
-  }
+  },
+
+  "licenses" : [{
+    "type" : "MIT",
+    "url" : "http://chilts.mit-license.org/2013/"
+  }]
 }
