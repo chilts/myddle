@@ -87,7 +87,7 @@ module.exports = function(fns, context, callback) {
 
         // call this function with the err and the context
         console.log('doNextError(): calling next myddleware at ' + upToIndex);
-        fns[upToIndex](err, context, function(err) {
+        fns[upToIndex](err, context, function(thisErr) {
             console.log('doNextError(): got an error after calling the myddleware');
             if (err) {
                 err = thisErr;
