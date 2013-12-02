@@ -8,14 +8,28 @@
 //
 // ----------------------------------------------------------------------------
 
-module.exports = function(fns, context, callback) {
-    if ( typeof context === 'function' ) {
-        callback = context;
+module.exports = function(context, fns, callback) {
+    console.log('1 - ' + typeof context);
+    console.log('1 - ' + Array.isArray(context));
+    console.log('2 - ' + typeof fns);
+    console.log('3 - ' + typeof callback);
+
+    // if context isn't given
+    if ( Array.isArray(context) ) {
+        callback = fns;
+        fns = context;
         context = {};
     }
 
-    context = context || {};
-    console.log(fns);
+    if ( typeof callback !== 'function' ) {
+        callback = context;
+        context = {};
+    }
+    console.log('1 - ' + typeof context);
+    console.log('1 - ' + Array.isArray(context));
+    console.log('2 - ' + typeof fns);
+    console.log('3 - ' + typeof callback);
+
     fns.forEach(function(fn) {
         console.log(fn);
         console.log(fn.length);
@@ -34,7 +48,7 @@ module.exports = function(fns, context, callback) {
         // we're finished since there are no more fns
         if ( upToIndex === fns.length ) {
             console.log('doNextError(): calling callback');
-            return callback(err);
+            return callback(err, context);
         }
 
         console.log('- fns:', fns);
@@ -78,7 +92,7 @@ module.exports = function(fns, context, callback) {
         // we're finished since there are no more fns
         if ( upToIndex === fns.length ) {
             console.log('doNextError(): calling callback');
-            return callback(err);
+            return callback(err, context);
         }
 
         console.log('- fns:', fns);

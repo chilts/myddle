@@ -18,7 +18,7 @@ error functions too.
 ```
 var myddle = require('myddle');
 
-myddle([ fn1, fn2, ...], context, function(err) {
+myddle({}, [ fn1, fn2, ...], function(err) {
     // called when all functions have been called
 });
 ```
@@ -33,6 +33,23 @@ function fn1(context, done) {
 ```
 
 And every single function will receive the context when called.
+
+You can pass a context to start off with, or it will default to `{}`:
+
+```
+// equivalent
+myddle({}, [ fn1, fn2, ...], function(err, context) {
+    // ...
+});
+
+// same as above
+myddle([ fn1, fn2, ...], function(err, context) {
+    // ...
+});
+```
+
+In all cases, the final function is called in the standard Node.js way, with `err` as the first argument. Whether `err`
+is set or not, the current `context` is always passed as the second argument.
 
 ## Errors ##
 

@@ -17,7 +17,7 @@ var myddle = require('../');
 
 test('got an error immediately', function(t) {
     var ctx = {};
-    myddle([ error1 ], ctx, function(err) {
+    myddle(ctx, [ error1 ], function(err, ctx) {
         t.ok(err, 'There is an error');
         t.equal(err, 'this is an error', 'error is correct');
         t.end();
@@ -26,12 +26,12 @@ test('got an error immediately', function(t) {
 
 test('got error, no further middleware called', function(t) {
     var ctx = {};
-    myddle([
+    myddle(ctx, [
         error1,
         function(ctx, done) {
             t.fail('This myddleware should never have been called');
         }
-    ], ctx, function(err) {
+    ], function(err, ctx) {
         t.ok(err, 'There is an error');
         t.equal(err, 'this is an error', 'error is correct');
         t.end();
@@ -42,7 +42,7 @@ test('two error myddlewares, both called', function(t) {
     var ctx = {
         t : t,
     };
-    myddle([ error1, handleError1, handleError2 ], ctx, function(err) {
+    myddle(ctx, [ error1, handleError1, handleError2 ], function(err, ctx) {
         t.ok(err, 'There is an error');
         t.equal(err, 'the final error', 'error is correct');
         t.end();
@@ -56,6 +56,7 @@ test('two error myddlewares, first consumes the error', function(t) {
         t : t,
     };
     myddle(
+        ctx,
         [
             error1,
             consumeError,
@@ -64,8 +65,7 @@ test('two error myddlewares, first consumes the error', function(t) {
                 next();
             }
         ],
-        ctx,
-        function(err) {
+        function(err, ctx) {
             t.ok(!err, 'There is no error');
             t.end();
         }
