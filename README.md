@@ -8,10 +8,11 @@
 
 ```
 
-Context carrying Middleware for regular functions, with error handlers. Kinda like async#applyEachSeries, but with
-error functions too.
+Context carrying Middleware for regular functions, with error handlers. Kinda like Connect/Express middleware but
+without the HTTP request/resonse. Or thinking about it another way, like async#applyEachSeries but with error
+functions.
 
-[![Build Status](https://api.travis-ci.org/chilts/nice-route53.png)](https://api.travis-ci.org/chilts/nice-route53.png)
+[![Build Status](https://api.travis-ci.org/chilts/myddle.png)](https://api.travis-ci.org/chilts/myddle.png)
 
 ## Synopsis ##
 
